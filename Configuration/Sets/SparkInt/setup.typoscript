@@ -1,0 +1,6 @@
+/*
+ * Spark Int - Site Set Setup
+ */
+
+@import 'EXT:spark_int/Configuration/TypoScript/Extensions/News/setup.typoscript'
+@import 'EXT:spark_int/Configuration/TypoScript/Extensions/EventNews/setup.typoscript'

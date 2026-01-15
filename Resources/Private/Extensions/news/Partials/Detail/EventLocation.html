@@ -1,0 +1,17 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:if condition="{n.location}">
+    <div class="row mb-3">
+        <div class="col-12">
+            <h5 class="text-uppercase text-muted border-bottom pb-2">Location</h5>
+            <div class="d-flex align-items-center">
+                <i class="fas fa-map-marker-alt fa-2x me-3 text-danger"></i>
+                <div>
+                    <h6 class="mb-0">{n.location.name}</h6>
+                    <small class="text-muted d-block">{n.location.street}, {n.location.city}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</f:if>
+
+</html>

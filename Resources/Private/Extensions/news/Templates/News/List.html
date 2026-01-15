@@ -1,0 +1,124 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="General" />
+
+<f:section name="content">
+    <!--TYPO3SEARCH_end-->
+    <f:render partial="Header/All" arguments="{data: contentObjectData}" />
+    <f:if condition="{news}">
+        <f:then>
+            <f:if condition="{settings.advanced.template.dropWrap}">
+                <f:then>
+                    <f:render section="ListWithPagination" arguments="{_all}" />
+                </f:then>
+                <f:else>
+                    <div class="news-list-view" id="news-container-{contentObjectData.uid}">
+                        <f:render section="ListWithPagination" arguments="{_all}" />
+                    </div>
+                </f:else>
+            </f:if>
+        </f:then>
+        <f:else>
+            <div class="alert alert-{settings.alert}">
+                <f:translate key="list_nonewsfound" />
+            </div>
+        </f:else>
+    </f:if>
+    <!--TYPO3SEARCH_begin-->
+</f:section>
+
+<f:section name="ListWithPagination">
+    <f:if condition="{settings.templateLayout} == 100">
+        <f:then>
+            <f:render partial="List/HeroCarousel" arguments="{newsItems: news, settings:settings}" />
+        </f:then>
+        <f:else>
+            <f:if condition="{settings.hidePagination}">
+                <f:then>
+                    <f:render section="ItemList" arguments="{newsItems: news, settings:settings, iterator:iterator}" />
+                </f:then>
+                <f:else>
+                    <f:if condition="{settings.list.paginate.insertAbove}">
+                        <f:render partial="List/Pagination"
+                            arguments="{pagination: pagination.pagination, paginator: pagination.paginator}" />
+                    </f:if>
+                    <f:render section="ItemList"
+                        arguments="{newsItems: pagination.paginator.paginatedItems, settings:settings, iterator:iterator}" />
+                    <f:if condition="{settings.list.paginate.insertBelow}">
+                        <f:render partial="List/Pagination"
+                            arguments="{pagination: pagination.pagination, paginator: pagination.paginator}" />
+                    </f:if>
+                </f:else>
+            </f:if>
+        </f:else>
+    </f:if>
+</f:section>
+
+<f:section name="ItemList">
+    <f:variable name="_partialName"
+        value="{f:render(partial: 'List/GetPartialName', arguments: _all) -> f:format.trim()}" />
+    <f:if condition="{_partialName} == ''">
+        <f:variable name="_partialName">Item</f:variable>
+    </f:if>
+
+    <f:if condition="{settings.templateLayout} == 12">
+        <f:then>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <f:for each="{newsItems}" as="newsItem" iteration="iterator">
+                    <f:render partial="List/{_partialName}"
+                        arguments="{newsItem: newsItem, settings:settings, iterator:iterator}" />
+                </f:for>
+            </div>
+        </f:then>
+        <f:else>
+            <f:if condition="{settings.templateLayout} == 14">
+                <f:then>
+                    <div class="row row-cols-1 row-cols-lg-2 g-4">
+                        <f:for each="{newsItems}" as="newsItem" iteration="iterator">
+                            <f:render partial="List/{_partialName}"
+                                arguments="{newsItem: newsItem, settings:settings, iterator:iterator}" />
+                        </f:for>
+                    </div>
+                </f:then>
+                <f:else>
+                    <f:if condition="{settings.templateLayout} == 15">
+                        <f:then>
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4">
+                                <f:for each="{newsItems}" as="newsItem" iteration="iterator">
+                                    <f:render partial="List/{_partialName}"
+                                        arguments="{newsItem: newsItem, settings:settings, iterator:iterator}" />
+                                </f:for>
+                            </div>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{settings.templateLayout} == 13">
+                                <f:then>
+                                    <div class="list-group">
+                                        <f:for each="{newsItems}" as="newsItem" iteration="iterator">
+                                            <f:render partial="List/{_partialName}"
+                                                arguments="{newsItem: newsItem, settings:settings, iterator:iterator}" />
+                                        </f:for>
+                                    </div>
+                                </f:then>
+                                <f:else>
+                                    <f:variable name="_listClasses">{settings.advanced.listClasses}</f:variable>
+                                    <f:if condition="{_listClasses} == ''">
+                                        <f:variable name="_listClasses">list-group</f:variable>
+                                    </f:if>
+                                    <ul class="{_listClasses}">
+                                        <f:for each="{newsItems}" as="newsItem" iteration="iterator">
+                                            <f:render partial="List/{_partialName}"
+                                                arguments="{newsItem: newsItem, settings:settings, iterator:iterator}" />
+                                        </f:for>
+                                    </ul>
+                                </f:else>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </f:else>
+            </f:if>
+        </f:else>
+    </f:if>
+</f:section>
+
+</html>

@@ -1,0 +1,38 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<n:link newsItem="{newsItem}" settings="{settings}"
+    class="list-group-item list-group-item-action d-flex align-items-center" title="{newsItem.title}">
+    <div class="flex-shrink-0">
+        <f:if condition="{newsItem.mediaPreviews}">
+            <f:then>
+                <f:media file="{newsItem.mediaPreviews.0.originalResource}" class="rounded"
+                    style="width: 48px; height: 48px; object-fit: cover"
+                    alt="{newsItem.mediaPreviews.0.originalResource.alternative}" />
+            </f:then>
+            <f:else>
+                <img src="https://placehold.co/100x100/EEE/333?text=img" class="rounded"
+                    style="width: 48px; height: 48px; object-fit: cover" alt="Placeholder">
+            </f:else>
+        </f:if>
+    </div>
+    <div class="flex-grow-1 ms-3">
+        <div class="small text-muted mb-0">
+            <f:format.date format="d.m.Y">{newsItem.datetime}</f:format.date>
+        </div>
+        <div class="small fw-bold">{newsItem.title}</div>
+        <!--        <div class="small text-muted">
+            <f:if condition="{newsItem.teaser}">
+                <f:then>
+                    {newsItem.teaser -> f:format.crop(maxCharacters: '80', respectWordBoundaries:'1')}
+                </f:then>
+                <f:else>
+                    {newsItem.bodytext -> f:format.crop(maxCharacters: '80', respectWordBoundaries:'1')}
+                </f:else>
+            </f:if>
+        </div>
+    -->
+    </div>
+</n:link>
+
+</html>

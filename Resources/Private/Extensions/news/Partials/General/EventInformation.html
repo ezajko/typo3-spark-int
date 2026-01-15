@@ -1,0 +1,20 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<ul class="extra mb-3 nav mx-n2">
+    <li class="mx-2">
+        <i class="fas fa-calendar-alt me-1 text-primary"></i>
+        <strong>
+            <f:format.date format="d.m.Y">{newsItem.datetime}</f:format.date>
+        </strong>
+        <f:if condition="{newsItem.eventEnd}">
+            - <f:format.date format="d.m.Y">{newsItem.eventEnd}</f:format.date>
+        </f:if>
+    </li>
+    <f:if condition="{newsItem.location}">
+        <li class="mx-2">
+            <i class="fas fa-map-pin me-1 text-danger"></i>
+            {newsItem.location.name}
+        </li>
+    </f:if>
+</ul>
+
+</html>

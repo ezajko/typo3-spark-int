@@ -1,0 +1,12 @@
+/*
+ * News Extension Setup
+ * Overrides view paths to use spark-int templates
+ */
+plugin.tx_news {
+    view {
+        templateRootPaths.20 = EXT:spark_int/Resources/Private/Extensions/news/Templates/
+        partialRootPaths.20 = EXT:spark_int/Resources/Private/Extensions/news/Partials/
+        partialRootPaths.30 = EXT:spark_core/Resources/Private/Partials/ContentElements/
+        layoutRootPaths.20 = EXT:spark_int/Resources/Private/Extensions/news/Layouts/
+    }
+}

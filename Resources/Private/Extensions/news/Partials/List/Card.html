@@ -1,0 +1,47 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<div class="col">
+    <div class="card h-100 shadow-sm border-0">
+        <n:link newsItem="{newsItem}" settings="{settings}" title="{newsItem.title}">
+            <f:if condition="{newsItem.mediaPreviews}">
+                <f:then>
+                    <f:media file="{newsItem.mediaPreviews.0.originalResource}" class="card-img-top"
+                        alt="{newsItem.mediaPreviews.0.originalResource.alternative}" />
+                </f:then>
+                <f:else>
+                    <img src="https://placehold.co/600x400/eee/999?text=News" class="card-img-top" alt="Placeholder">
+                </f:else>
+            </f:if>
+        </n:link>
+        <div class="card-body">
+            <h5 class="card-title">
+                <n:link newsItem="{newsItem}" settings="{settings}" title="{newsItem.title}"
+                    class="text-decoration-none text-dark">
+                    {newsItem.title}
+                </n:link>
+            </h5>
+            <p class="card-text text-muted small">
+                <f:format.date format="d.m.Y">{newsItem.datetime}</f:format.date>
+            </p>
+            <p class="card-text">
+                <f:if condition="{newsItem.teaser}">
+                    <f:then>
+                        {newsItem.teaser -> f:format.crop(maxCharacters: '100', respectWordBoundaries:'1')}
+                    </f:then>
+                    <f:else>
+                        {newsItem.bodytext -> f:format.crop(maxCharacters: '100', respectWordBoundaries:'1')}
+                    </f:else>
+                </f:if>
+            </p>
+        </div>
+        <div class="card-footer bg-transparent border-top-0">
+            <n:link newsItem="{newsItem}" settings="{settings}" class="btn btn-outline-primary btn-sm stretched-link"
+                title="{newsItem.title}">
+                <f:translate key="more-link" />
+            </n:link>
+        </div>
+    </div>
+</div>
+
+</html>

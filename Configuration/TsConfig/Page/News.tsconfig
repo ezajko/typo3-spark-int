@@ -1,0 +1,10 @@
+# Add Template Layouts for News Plugin
+tx_news.templateLayouts {
+    10 = Default List
+    11 = Horizontal List
+    12 = Cards (Grid)
+    13 = Simple List
+    14 = Horizontal Cards
+    15 = Text Cards (4 Columns)
+    100 = Hero Carousel
+}

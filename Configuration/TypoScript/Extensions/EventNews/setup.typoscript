@@ -1,0 +1,13 @@
+/*
+ * EventNews Extension Setup
+ * Adds separate overlay paths for EventNews specific templates
+ * Uses index 21 to override both original News (10) and spark-int News (20) if needed, 
+ * or just provides specific Event templates.
+ */
+plugin.tx_news {
+    view {
+        templateRootPaths.21 = EXT:spark_int/Resources/Private/Extensions/eventnews/Templates/
+        partialRootPaths.21 = EXT:spark_int/Resources/Private/Extensions/eventnews/Partials/
+        layoutRootPaths.21 = EXT:spark_int/Resources/Private/Extensions/eventnews/Layouts/
+    }
+}

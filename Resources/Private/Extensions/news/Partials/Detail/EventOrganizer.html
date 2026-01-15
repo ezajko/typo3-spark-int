@@ -1,0 +1,19 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:if condition="{n.organizer}">
+    <div class="row mb-3">
+        <div class="col-12">
+            <h5 class="text-uppercase text-muted border-bottom pb-2">Organizer</h5>
+            <div class="d-flex align-items-center">
+                <i class="fas fa-sitemap fa-2x me-3 text-primary"></i>
+                <div>
+                    <h6 class="mb-0">{n.organizer.name}</h6>
+                    <f:if condition="{n.organizer.email}">
+                        <a href="mailto:{n.organizer.email}" class="text-decoration-none small">{n.organizer.email}</a>
+                    </f:if>
+                </div>
+            </div>
+        </div>
+    </div>
+</f:if>
+
+</html>

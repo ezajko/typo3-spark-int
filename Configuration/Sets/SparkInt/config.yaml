@@ -1,0 +1,4 @@
+name: rootba/spark-int
+label: 'Spark Integrations'
+dependencies:
+  - spark-design-system/spark-core
