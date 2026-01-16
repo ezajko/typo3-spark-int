@@ -91,9 +91,9 @@
                             </div>
                         </f:then>
                         <f:else>
-                            <f:if condition="{settings.templateLayout} == 13">
+                            <f:if condition="{settings.templateLayout} == 16">
                                 <f:then>
-                                    <div class="list-group">
+                                    <div class="list-group list-group-flush">
                                         <f:for each="{newsItems}" as="newsItem" iteration="iterator">
                                             <f:render partial="List/{_partialName}"
                                                 arguments="{newsItem: newsItem, settings:settings, iterator:iterator}" />
@@ -101,16 +101,28 @@
                                     </div>
                                 </f:then>
                                 <f:else>
-                                    <f:variable name="_listClasses">{settings.advanced.listClasses}</f:variable>
-                                    <f:if condition="{_listClasses} == ''">
-                                        <f:variable name="_listClasses">list-group</f:variable>
+                                    <f:if condition="{settings.templateLayout} == 13">
+                                        <f:then>
+                                            <div class="list-group">
+                                                <f:for each="{newsItems}" as="newsItem" iteration="iterator">
+                                                    <f:render partial="List/{_partialName}"
+                                                        arguments="{newsItem: newsItem, settings:settings, iterator:iterator}" />
+                                                </f:for>
+                                            </div>
+                                        </f:then>
+                                        <f:else>
+                                            <f:variable name="_listClasses">{settings.advanced.listClasses}</f:variable>
+                                            <f:if condition="{_listClasses} == ''">
+                                                <f:variable name="_listClasses">list-group</f:variable>
+                                            </f:if>
+                                            <ul class="{_listClasses}">
+                                                <f:for each="{newsItems}" as="newsItem" iteration="iterator">
+                                                    <f:render partial="List/{_partialName}"
+                                                        arguments="{newsItem: newsItem, settings:settings, iterator:iterator}" />
+                                                </f:for>
+                                            </ul>
+                                        </f:else>
                                     </f:if>
-                                    <ul class="{_listClasses}">
-                                        <f:for each="{newsItems}" as="newsItem" iteration="iterator">
-                                            <f:render partial="List/{_partialName}"
-                                                arguments="{newsItem: newsItem, settings:settings, iterator:iterator}" />
-                                        </f:for>
-                                    </ul>
                                 </f:else>
                             </f:if>
                         </f:else>

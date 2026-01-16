@@ -1,38 +1,59 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers" data-namespace-typo3-fluid="true">
 
-<div id="heroCarousel-{contentObjectData.uid}" class="carousel slide hero-carousel" data-bs-ride="carousel">
+<div id="heroCarousel-{contentObjectData.uid}" class="carousel slide carousel-md hero-carousel" data-bs-ride="carousel">
+
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+        <f:for each="{newsItems}" as="newsItem" iteration="iterator">
+            <button type="button" data-bs-target="#heroCarousel-{contentObjectData.uid}"
+                data-bs-slide-to="{iterator.index}" class="{f:if(condition: iterator.isFirst, then: 'active')}"
+                aria-current="{f:if(condition: iterator.isFirst, then: 'true', else: 'false')}"
+                aria-label="Slide {iterator.cycle}"></button>
+        </f:for>
+    </div>
+
     <div class="carousel-inner">
         <f:for each="{newsItems}" as="newsItem" iteration="iterator">
             <div class="carousel-item {f:if(condition: iterator.isFirst, then: 'active')}">
+                <!-- Hero Section Wrapper -->
+                <f:variable name="heroBgImage">https://placehold.co/1920x800/222/FFF?text=ETF+Spark</f:variable>
                 <f:if condition="{newsItem.mediaPreviews}">
                     <f:then>
-                        <f:media file="{newsItem.mediaPreviews.0.originalResource}" class="d-block w-100 hero-image"
-                            alt="{newsItem.mediaPreviews.0.originalResource.alternative}" />
+                        <f:variable name="heroBgImage">
+                            <f:uri.image image="{newsItem.mediaPreviews.0}" />
+                        </f:variable>
                     </f:then>
-                    <f:else>
-                        <img src="https://placehold.co/1920x800/222/FFF?text=ETF+Spark" class="d-block w-100 hero-image"
-                            alt="Placeholder">
-                    </f:else>
                 </f:if>
-                <div class="carousel-caption d-none d-md-block text-start">
-                    <div class="container">
-                        <h1 class="display-3 fw-bold text-shadow">{newsItem.title}</h1>
-                        <f:if condition="{newsItem.teaser}">
-                            <div class="lead text-shadow">
-                                <f:format.html>{newsItem.teaser}</f:format.html>
+
+                <div class="hero hero-md h-100" style="background-image: url('{heroBgImage}');">
+                    <div class="hero-overlay"></div>
+
+                    <div class="hero-content container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-10">
+                                <h1 class="ez-hero__title text-white">{newsItem.title}</h1>
+                                <f:if condition="{newsItem.teaser}">
+                                    <div class="ez-hero__subtitle text-white-50">
+                                        <f:format.html>{newsItem.teaser}</f:format.html>
+                                    </div>
+                                </f:if>
+                                <div class="ez-hero__cta">
+                                    <n:link newsItem="{newsItem}" settings="{settings}"
+                                        class="btn btn-light btn-lg rounded-0 text-uppercase fw-bold px-4 py-3">
+                                        <i class="bi bi-book me-2"></i>
+                                        <f:translate key="more-link" />
+                                    </n:link>
+                                </div>
                             </div>
-                        </f:if>
-                        <n:link newsItem="{newsItem}" settings="{settings}" class="btn btn-primary btn-lg mt-3"
-                            title="{newsItem.title}">
-                            <f:translate key="more-link" />
-                        </n:link>
+                        </div>
                     </div>
                 </div>
-                <div class="hero-overlay"></div>
             </div>
         </f:for>
     </div>
+
+    <!-- Controls -->
     <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel-{contentObjectData.uid}"
         data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -46,43 +67,80 @@
 </div>
 
 <style>
-    .hero-carousel {
+    /* Hero Base Styles (Ported from Hero.astro) */
+    .hero {
         position: relative;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        min-height: 400px;
+        /* Fallback */
     }
 
-    .hero-carousel .hero-image {
+    .hero-md {
         height: 600px;
-        object-fit: cover;
+        /* medium height */
     }
 
-    .hero-carousel .hero-overlay {
+    .hero-overlay {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
         z-index: 1;
     }
 
-    .hero-carousel .carousel-caption {
-        bottom: 20%;
+    .hero-content {
+        position: relative;
         z-index: 2;
-        left: 0;
-        right: 0;
-        text-align: left;
+        width: 100%;
     }
 
-    .hero-carousel .text-shadow {
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    /* Content Typography (Ported from Usage) */
+    .ez-hero__title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
     }
 
-    /* Simple Animation */
-    .carousel-item-next.carousel-item-start,
-    .carousel-item-prev.carousel-item-end {
-        transform: translateX(0);
-        margin-left: 0;
-        margin-right: 0;
+    .ez-hero__subtitle {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+    }
+
+    .ez-hero__cta {
+        margin-top: 1.5rem;
+    }
+
+    /* Carousel Indicators Customization (Ported from HeroCarousel.astro) */
+    .hero-carousel .carousel-indicators {
+        bottom: 2rem;
+        margin-bottom: 0;
+        z-index: 20;
+    }
+
+    .hero-carousel .carousel-indicators button {
+        width: 12px;
+        height: 12px;
+        margin: 0 6px;
+        background-color: #fff;
+        opacity: 0.6;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease;
+        border-radius: 0;
+        /* Squares */
+    }
+
+    .hero-carousel .carousel-indicators button.active {
+        opacity: 1;
+        background-color: #fff;
+        border-color: rgba(0, 0, 0, 0.5);
+        transform: scale(1.2);
     }
 </style>
 
