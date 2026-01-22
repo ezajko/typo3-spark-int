@@ -10,7 +10,7 @@ Spark Integration
     spark_int
 
 :Package name:
-    etf-unsa/spark-int
+    rootba/typo3-spark-int
 
 :Version:
     1.0.0
@@ -19,7 +19,7 @@ Spark Integration
     en
 
 :Author:
-    Ernedin Zajko & ETF Sarajevo
+    Ernedin Zajko
 
 :License:
     This extension documentation is published under the

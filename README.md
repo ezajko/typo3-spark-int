@@ -1,6 +1,6 @@
 # Spark Integration Extension
 
-Integration layer and data exchange functionality for the ETF Spark TYPO3 distribution.
+Integration layer and data exchange functionality for the Spark TYPO3 distribution.
 
 ## Features
 
@@ -10,7 +10,7 @@ Integration layer and data exchange functionality for the ETF Spark TYPO3 distri
 
 ## Installation
 
-This extension is part of the ETF Spark distribution.
+This extension is part of the Spark distribution.
 
 ```bash
 composer req rootba/typo3-spark-int
