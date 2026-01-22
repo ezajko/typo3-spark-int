@@ -13,7 +13,7 @@ Integration layer and data exchange functionality for the ETF Spark TYPO3 distri
 This extension is part of the ETF Spark distribution.
 
 ```bash
-composer req etf-unsa/spark-int
+composer req rootba/typo3-spark-int
 ```
 
 ## License
